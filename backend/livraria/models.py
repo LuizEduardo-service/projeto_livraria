@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.contrib.auth.models import User
 
 # Create your models here.
 class BaseModel(models.Model):
@@ -51,3 +51,14 @@ class Livros(BaseModel):
     class Meta:
         verbose_name = 'Livro'
         verbose_name_plural = 'Livros'
+
+class Compra(BaseModel):
+
+    class StatusCompra(models.IntegerChoices):
+        CARRINHO = 1, 'Carrinho'
+        REALIZADO = 2, 'Realizado'
+        PAGO = 3, 'Pago'
+        ENTREGUE = 4, 'Entregue'
+
+    usuario = models.ForeignKey(User, on_delete=models.PROTECT, related_name='compras')
+    status = models.IntegerField(choices=StatusCompra.choices, default=StatusCompra.CARRINHO)
