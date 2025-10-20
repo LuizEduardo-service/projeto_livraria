@@ -20,3 +20,13 @@ class Editora(BaseModel):
 
     def __str__(self):
         return self.nome
+    
+class Autor(BaseModel):
+    nome = models.CharField(max_length=255)
+
+    def __str__(self):
+        return self.nome
+    
+    class Meta:
+        verbose_name = 'Autor'
+        verbose_name_plural = 'Autores'
