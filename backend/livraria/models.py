@@ -11,6 +11,12 @@ class BaseModel(models.Model):
 class Categoria(BaseModel):
     descricao = models.CharField(max_length=255)
 
+    def __str__(self):
+        return self.descricao
+
 class Editora(BaseModel):
     nome = models.CharField(max_length=255)
     site = models.URLField()
+
+    def __str__(self):
+        return self.nome
