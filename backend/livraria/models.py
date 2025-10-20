@@ -1,5 +1,6 @@
-from django.db import models
 from django.contrib.auth.models import User
+from django.db import models
+
 
 # Create your models here.
 class BaseModel(models.Model):
@@ -52,6 +53,7 @@ class Livros(BaseModel):
         verbose_name = 'Livro'
         verbose_name_plural = 'Livros'
 
+
 class Compra(BaseModel):
 
     class StatusCompra(models.IntegerChoices):
@@ -66,7 +68,6 @@ class Compra(BaseModel):
     class Meta:
         verbose_name = 'Compra'
         verbose_name_plural = 'Compras'
-
 
 
 class ItensCompra(BaseModel):
