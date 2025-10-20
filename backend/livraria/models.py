@@ -62,3 +62,14 @@ class Compra(BaseModel):
 
     usuario = models.ForeignKey(User, on_delete=models.PROTECT, related_name='compras')
     status = models.IntegerField(choices=StatusCompra.choices, default=StatusCompra.CARRINHO)
+
+    class Meta:
+        verbose_name = 'Compra'
+        verbose_name_plural = 'Compras'
+
+
+
+class ItensCompra(BaseModel):
+    compra = models.ForeignKey(Compra, on_delete=models.CASCADE, related_name='itens')
+    livro = models.ForeignKey(Livros, on_delete=models.PROTECT, related_name='+')
+    quantidade = models.IntegerField()
