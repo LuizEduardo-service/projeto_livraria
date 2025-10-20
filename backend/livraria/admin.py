@@ -7,5 +7,10 @@ admin.site.register(Categoria)
 admin.site.register(Editora)
 admin.site.register(Autor)
 admin.site.register(Livros)
-admin.site.register(Compra)
-admin.site.register(ItensCompra)
+
+class ItensInline(admin.TabularInline):
+    model = ItensCompra
+
+@admin.register(Compra)
+class CompraAdmin(admin.ModelAdmin):
+    inlines = (ItensInline, )
