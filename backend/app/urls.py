@@ -1,11 +1,15 @@
 
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 
-from livraria import views
+from livraria.views.categoria import CategoriaViewSet
+
+from rest_framework import routers
+
+routes = routers.DefaultRouter()
+routes.register(r'categorias', CategoriaViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('categorias/', view=views.CategoriaView.as_view(), name='categorias'),
-    path('categorias-apiview/', view=views.CategoriaList.as_view(), name='categorias-api')
+    path('', include(routes.urls))
 ]
