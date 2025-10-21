@@ -6,6 +6,7 @@ from livraria.views.categoria import CategoriaViewSet
 from livraria.views.editora import EditoraViewSet
 from livraria.views.livro import LivrosViewSet
 from livraria.views.autor import AutorViewSet
+from livraria.views.compra import CompraViewSet
 
 from rest_framework import routers
 
@@ -14,6 +15,7 @@ routes.register(r'categorias', CategoriaViewSet)
 routes.register(r'editoras', EditoraViewSet)
 routes.register(r'livros', LivrosViewSet)
 routes.register(r'autores', AutorViewSet)
+routes.register(r'compras', CompraViewSet)
 
 urlpatterns = [
     
