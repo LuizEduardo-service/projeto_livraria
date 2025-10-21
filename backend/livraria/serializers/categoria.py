@@ -4,4 +4,5 @@ from livraria.models import Categoria
 class CategoriaSerializer(serializers.ModelSerializer):
     class Meta:
         model = Categoria
-        fields = '__all__'
+        # fields = '__all__'
+        exclude = ('updated_at', 'created_at', )
