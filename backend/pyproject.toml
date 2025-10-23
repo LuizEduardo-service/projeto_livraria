@@ -11,7 +11,8 @@ dependencies = [
     "django (>=5.2.7,<6.0.0)",
     "djangorestframework (>=3.16.1,<4.0.0)",
     "djangorestframework-simplejwt (>=5.5.1,<6.0.0)",
-    "drf-spectacular (>=0.28.0,<0.29.0)"
+    "drf-spectacular (>=0.28.0,<0.29.0)",
+    "django-cors-headers (>=4.9.0,<5.0.0)"
 ]
 
 
@@ -22,7 +23,8 @@ build-backend = "poetry.core.masonry.api"
 [dependency-groups]
 dev = [
     "ruff (>=0.14.1,<0.15.0)",
-    "taskipy (>=1.14.1,<2.0.0)"
+    "taskipy (>=1.14.1,<2.0.0)",
+    "poetry-plugin-export (>=1.9.0,<2.0.0)"
 ]
 
 
@@ -44,6 +46,7 @@ format = 'ruff format'
 run = 'python manage.py runserver'
 migrate = 'python manage.py migrate'
 migration = 'python manage.py makemigrations'
+req = "poetry export --without-hashes > requirements.txt"
 # test = 'pytest -s -x --cov=fastapi_zero_asnyc -vv'
 pre_format = 'ruff check --fix'
 # pre_test = 'task lint'
