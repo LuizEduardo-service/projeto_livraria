@@ -10,4 +10,4 @@ class CompraViewSet(ModelViewSet):
         if self.action in ['list', 'retrieve']:
             return CompraSerializer
         return CriarEditarCompraSerializer
-        
+    
