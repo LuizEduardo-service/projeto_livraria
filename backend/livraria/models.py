@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 from django.db import models
-
+from django.db.models import F
 
 # Create your models here.
 class BaseModel(models.Model):
@@ -69,6 +69,10 @@ class Compra(BaseModel):
         verbose_name = 'Compra'
         verbose_name_plural = 'Compras'
 
+    @property
+    def total(self):
+        queryset = self.itens.all().aggregate(total=models.Sum(F('quantidade') * F('livro__preco')))
+        return queryset['total']
 
 class ItensCompra(BaseModel):
     compra = models.ForeignKey(Compra, on_delete=models.CASCADE, related_name='itens')

@@ -11,4 +11,4 @@ class CompraSerializer(ModelSerializer):
         return instance.get_status_display()
     class Meta:
         model = Compra
-        exclude = ('updated_at', 'created_at', )
+        fields = ('id', "status", 'usuario', 'itens', 'total',)
