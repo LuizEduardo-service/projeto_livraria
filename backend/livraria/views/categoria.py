@@ -1,6 +1,6 @@
-from livraria.models import Categoria
 from rest_framework.viewsets import ModelViewSet
 
+from livraria.models import Categoria
 from livraria.serializers.categoria import CategoriaSerializer
 
 

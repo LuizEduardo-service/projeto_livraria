@@ -1,7 +1,7 @@
-from livraria.serializers.editora import EditoraSerializer
-from livraria.models import Editora
-
 from rest_framework.viewsets import ModelViewSet
+
+from livraria.models import Editora
+from livraria.serializers.editora import EditoraSerializer
 
 
 class EditoraViewSet(ModelViewSet):

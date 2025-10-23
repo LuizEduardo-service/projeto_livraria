@@ -1,22 +1,25 @@
-from rest_framework.serializers import ModelSerializer, CharField, SerializerMethodField
+from rest_framework.serializers import (
+    CharField,
+    ModelSerializer,
+    SerializerMethodField,
+)
 
+from livraria.models import Livros
 from livraria.serializers.editora import EditoraSerializer
-from livraria.models import Autor, Livros
 
 
 class LivrosSerializer(ModelSerializer):
-    
+
     class Meta:
         model = Livros
         # fields = '__all__'
         exclude = ('updated_at', 'created_at', )
 
 
-
 class LivrosDetailSerializer(ModelSerializer):
     categoria = CharField(source='categoria.descricao')
     editora = EditoraSerializer()
-    autores = SerializerMethodField() # precisa cria o metodo get_autores
+    autores = SerializerMethodField()  # precisa cria o metodo get_autores
     class Meta:
         model = Livros
         # fields = '__all__'

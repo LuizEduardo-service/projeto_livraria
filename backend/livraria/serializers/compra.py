@@ -1,8 +1,15 @@
-from rest_framework.serializers import (ModelSerializer, CharField, 
-                                        SerializerMethodField, HiddenField, CurrentUserDefault,
-                                        ValidationError)
-from livraria.serializers.itens_compra import ItensCompraSerializer
+from rest_framework.serializers import (
+    CharField,
+    CurrentUserDefault,
+    HiddenField,
+    ModelSerializer,
+    SerializerMethodField,
+    ValidationError,
+)
+
 from livraria.models import Compra, ItensCompra
+from livraria.serializers.itens_compra import ItensCompraSerializer
+
 
 class CompraSerializer(ModelSerializer):
     status = SerializerMethodField()
@@ -15,11 +22,11 @@ class CompraSerializer(ModelSerializer):
         model = Compra
         fields = ('id', "status", 'usuario', 'itens', 'total',)
 
+
 class CriarEditarItensCompraSerializer(ModelSerializer):
     class Meta:
         model = ItensCompra
         fields = ('livro', 'quantidade')
-
 
     def validate(self, attrs):
         if attrs['quantidade'] > attrs['livro'].quantidade:
@@ -37,7 +44,6 @@ class CriarEditarCompraSerializer(ModelSerializer):
         model = Compra
         fields = ('usuario', 'itens')
 
-    
     def create(self, validated_data):
         itens = validated_data.pop('itens')
         compra = Compra.objects.create(**validated_data)
@@ -45,7 +51,7 @@ class CriarEditarCompraSerializer(ModelSerializer):
             ItensCompra.objects.create(compra=compra, **item)
         compra.save()
         return compra
-    
+
     def update(self, instance, validated_data):
         itens = validated_data.pop('itens')
 
