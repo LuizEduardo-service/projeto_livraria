@@ -1,6 +1,6 @@
 from rest_framework.serializers import ModelSerializer, CharField, SerializerMethodField
 from livraria.serializers.itens_compra import ItensCompraSerializer
-from livraria.models import Compra
+from livraria.models import Compra, ItensCompra
 
 class CompraSerializer(ModelSerializer):
     status = SerializerMethodField()
@@ -12,3 +12,24 @@ class CompraSerializer(ModelSerializer):
     class Meta:
         model = Compra
         fields = ('id', "status", 'usuario', 'itens', 'total',)
+
+class CriarEditarItensCompraSerializer(ModelSerializer):
+    class Meta:
+        model = ItensCompra
+        fields = ('livro', 'quantidade')
+
+
+class CriarEditarCompraSerializer(ModelSerializer):
+    itens = CriarEditarItensCompraSerializer(many=True)
+
+    class Meta:
+        model = Compra
+        fields = ('usuario', 'itens')
+
+    def create(self, validated_data):
+        itens = validated_data.pop('itens')
+        compra = Compra.objects.create(**validated_data)
+        for item in itens:
+            ItensCompra.objects.create(compra=compra, **item)
+        compra.save()
+        return compra
